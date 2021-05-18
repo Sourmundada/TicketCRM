@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}View Staff Member | TicketSystem{% endblock title %}
+
+{% block content %}
+    
+        <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+          <div class="card-body">
+          <h4 class="card-title mb-4">View Staff Member Details</h4>
+          <p><b>Full Name:</b> {{ staff_user.full_name }}</p>
+          <hr>
+          <p><b>Email:</b> {{ staff_user.email }}</p>
+          <hr>
+          <p><b>Tickets Assigned:</b> {{ tickets_count }} Tickets</p>
+          <hr>
+
+          {% if staff_user.is_active == True %}
+          
+          <form method="POST">
+              {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Block {{ staff_user.first_name }}</button>
+          </form>
+          
+          {% else %}
+          
+          <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Unblock {{ staff_user.first_name }}</button>
+            </form>
+          
+            {% endif %}
+
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+
+        <table class="table table-hover table-bordered text-center mt-3">
+            <tr class="text-center">
+                <th colspan="5">Tickets Assigned To {{ staff_user.full_name }}.</th>
+            </tr>
+            <tr class="text-center">
+                <th>no.</th>
+                <th>Name</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ ticket.name }}</td>
+                <td>{{ ticket.assigned_to.full_name }}</td>
+                <td>{{ ticket.status }}</td>
+                <td><a href="{% url 'view_ticket' ticket.id %}" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+
+{% endblock content %}

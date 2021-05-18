@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin | TicketSystem{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_admin %}
+
+<div class="jumbotron">
+
+    <h2>Hi {{ user.email }}!</h2>
+    <hr class="my-2">
+    <p>Welcome, Admin! Here You can check your staff's performance.</p>
+    <p class="lead">
+        <form action="{% url 'admin_logout' %}">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </p>
+</div>
+
+<table class="table table-hover table-bordered text-center">
+    <tr class="text-center">
+        <th>List of Tickets <a href="{% url 'add_tickets' %}" class="nav-link">+</a></th>
+    </tr>
+    <tr class="text-center">
+        <th>no.</th>
+        <th>Name</th>
+        <th>Assigned To</th>
+        <th>Status</th>
+        <th>View</th>
+    </tr>
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ ticket.name }}</td>
+        <td>{{ ticket.assigned_to.full_name }}</td>
+        <td>{{ ticket.status }}</td>
+        <td><a href="{% url 'view_ticket' ticket.id %}" class="btn btn-primary btn-sm">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<table class="table table-hover table-bordered text-center">
+    <tr class="text-center">
+        <th colspan="5">List of Staff Members</th>
+    </tr>
+    <tr class="text-center">
+        <th>no.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>View</th>
+    </tr>
+    {% for member in staff %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ member.full_name }}</td>
+        <td>{{ member.email }}</td>
+        <td><a href="{% url 'staff_tickets' member.id %}" class="btn btn-primary btn-sm">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<div class="jumbotron">
+
+    <h2>You Can't Access This Page ..</h2>
+    <hr class="my-2">
+    <p>Sorry But no content for you!!</p>
+    <p class="lead">
+        <a href="/" class="btn btn-primary">Go Back</a>
+    </p>
+</div>
+{% endif %}
+
+{% endblock content %}

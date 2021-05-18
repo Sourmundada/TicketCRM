@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Staff Login | TicketSystem{% endblock title %}
+
+{% block content %}
+    
+        <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+          <div class="card-body">
+          <h4 class="card-title mb-4">Staff Login</h4>
+          <form method="POST">
+            {% csrf_token %}
+              <div class="form-group">
+                 <input type="email" class="form-control" placeholder="Your Email" name="email" required>
+              </div> <!-- form-group// -->
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
+              </div> <!-- form-group// -->
+    
+              <div class="form-group">
+                  <a class="nav-link float-right mb-2" href="#">Forgot password?</a>
+              </div> <!-- form-group form-check .// -->
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </div> <!-- form-group// -->
+          </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+
+        <br><br>
+        <p class="text-center">Don't Have An Account? <a href="{% url 'staff_register' %}" class="nav-link">Register</a></p>
+
+
+{% endblock content %}

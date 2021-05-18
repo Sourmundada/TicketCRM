@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome | TicketSystem{% endblock title %}
+
+
+{% block content %}
+
+<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+    <div class="card-body">
+    <h4 class="card-title mb-4">Add Attachment</h4>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="attachment" required>
+        <br><br>
+        <button type="submit" class="btn btn-primary">+ Add Attachment</button>
+    </form>
+    </div>
+</div>
+
+{% endblock content %}

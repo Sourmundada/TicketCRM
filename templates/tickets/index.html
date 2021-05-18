@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome | TicketSystem{% endblock title %}
+
+
+{% block content %}
+
+<div class="jumbotron">
+    <h2>Welcome To TicketSystem!</h2>
+    <hr class="my-2">
+    <p>Leads That Generates Conversions.</p>
+    <p class="lead">
+        {% if user.is_authenticated %}
+        {% if user.is_admin %}
+        <a class="btn btn-primary" href="{% url 'admin_home' %}" role="button">View Reports</a>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'staff_home' %}" role="button">View Reports</a>
+        {% endif %}
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'staff_login' %}" role="button">Staff Login</a>
+        <a class="btn btn-primary" href="{% url 'admin_login' %}" role="button">Admin Login</a>
+        {% endif %}
+    </p>
+</div>
+
+{% endblock content %}

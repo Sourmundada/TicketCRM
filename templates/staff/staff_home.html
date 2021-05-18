@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin | TicketSystem{% endblock title %}
+
+
+{% block content %}
+
+<div class="jumbotron">
+
+    <h2>Hi {{ user.first_name }}!</h2>
+    <hr class="my-2">
+    <p>Welcome, Staff! Here You can check your performance.</p>
+    <p class="lead">
+        <form action="{% url 'staff_logout' %}">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </p>
+</div>
+
+<table class="table table-hover table-bordered text-center">
+    <tr class="text-center">
+        <th>List of Tickets</th>
+    </tr>
+    <tr class="text-center">
+        <th>no.</th>
+        <th>Name</th>
+        <th>Assigned To</th>
+        <th>Status</th>
+        <th>View</th>
+    </tr>
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ ticket.name }}</td>
+        <td>{{ ticket.assigned_to.full_name }}</td>
+        <td>{{ ticket.status }}</td>
+        <td><a href="{% url 'view_ticket' ticket.id %}" class="btn btn-primary btn-sm">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
