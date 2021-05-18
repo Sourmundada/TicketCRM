@@ -10,8 +10,7 @@
     <h4 class="card-title mb-4">Add Attachment</h4>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="attachment" required>
-        <br><br>
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary">+ Add Attachment</button>
     </form>
     </div>

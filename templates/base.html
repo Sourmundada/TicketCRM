@@ -37,9 +37,13 @@
         <ul class="navbar-nav mr-auto">
           <!-- Empty List -->
         </ul>
-        <span class="navbar-text">
+        <span>
           {% if user.is_authenticated %}
-          Hi {{ user.email }}!
+          {% if user.is_admin %}
+          <a href="{% url 'admin_home' %}" class="btn btn-primary">Your Profile</a>
+          {% else %}
+          <a href="{% url 'staff_home' %}" class="btn btn-primary">Your Profile</a>
+          {% endif %}
           {% else %}
           Hi User!
           {% endif %}

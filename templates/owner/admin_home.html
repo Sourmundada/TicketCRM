@@ -14,6 +14,7 @@
     <p>Welcome, Admin! Here You can check your staff's performance.</p>
     <p class="lead">
         <form action="{% url 'admin_logout' %}">
+            <a href="{% url 'add_attachments' %}" class="btn btn-primary">+ Add Attachments</a>
             <button type="submit" class="btn btn-primary">Logout</button>
         </form>
     </p>

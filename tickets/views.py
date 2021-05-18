@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from accounts.models import Account, Staff
 from .models import Attachment, Ticket
-from .forms import TicketForm
+from .forms import TicketForm, AttachmentForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -35,6 +35,7 @@ def add_tickets(request):
             form = TicketForm(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('admin_home')
             else:
                 return redirect('index')
     else:
@@ -64,13 +65,14 @@ def view_ticket(request, ticket_pk):
     ticket = get_object_or_404(Ticket, id=ticket_pk)
 
     attachments = Attachment.objects.filter(ticket=ticket)
+    attachments_count = attachments.count()
 
     if request.method == "POST":
         ticket.status = request.POST['status']
         ticket.save()
         return redirect('index')
 
-    return render(request, 'tickets/view_ticket.html', {'ticket': ticket, 'attachments': attachments})
+    return render(request, 'tickets/view_ticket.html', {'ticket': ticket, 'attachments': attachments, 'attachments_count': attachments_count})
 
 @login_required(login_url='index')
 def delete_ticket(request, ticket_pk):
@@ -106,7 +108,18 @@ def staff_tickets(request, user_pk):
 
     return render(request, 'tickets/staff_tickets.html', {'staff_user': staff_user, 'tickets': tickets, 'tickets_count': tickets_count})
 
-def add_attachments(request, ticket_pk):
-    ticket = get_object_or_404(Ticket, id=ticket_pk)
 
-    return render(request, 'tickets/attachments.html')
+@login_required(login_url='index')
+def add_attachments(request):
+    if request.user.is_admin:
+        if request.method == "POST":
+            form = AttachmentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_home')
+            else:
+                return redirect('index')
+    else:
+        return redirect('index')
+    
+    return render(request, 'tickets/attachments.html', {'form': AttachmentForm()})

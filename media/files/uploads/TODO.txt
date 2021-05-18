@@ -1,0 +1,6 @@
+-CRUD Functionality 
+-User Authentication ~ Username, Email, Phone.
+-Payment Integration ~ PayPal, RazorPay, Stripe.
+-Web Scraping ~ Beautiful_Soup
+-Celery & Redis ~ Tasks Queues
+-Realtime WebSockets ~ Channels & Socket.io

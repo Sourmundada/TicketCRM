@@ -10,5 +10,5 @@ urlpatterns = [
     path('<int:ticket_pk>/update_ticket/', views.update_ticket, name='update_ticket'),
     path('<int:ticket_pk>/delete_ticket/', views.delete_ticket, name='delete_ticket'),
     path('staff_member/<int:user_pk>/', views.staff_tickets, name='staff_tickets'),
-    path('<int:ticket_pk>/add_file/', views.add_attachments, name='add_attachments'),
+    path('add_file/', views.add_attachments, name='add_attachments'),
 ]

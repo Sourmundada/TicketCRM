@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Application</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+            overflow: hidden;
+        }
+    </style>
+    
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <section class="section">
+
+        <div class="card">
+            <div class="card-content">
+                <div class="media">
+                    <div class="card-image">
+                        <img v-bind:src="image">
+                      </div>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{ name }}</p>
+                    </div>
+
+                <div class="content" v-if='showMemo'>
+                    <p>{{ memo }}</p>
+                </div>
+                <div class="content" v-else='showMemo'>
+                    <p>Go To Hell!</p>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </body>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: 'Vue Hero',
+                memo: 'This is Vue Hero description!',
+                showMemo: false,
+                image: 'https://bulma.io/images/placeholders/1280x960.png',
+            }
+        })
+    </script>
+</body>
+</html>
