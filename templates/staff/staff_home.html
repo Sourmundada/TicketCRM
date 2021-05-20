@@ -29,6 +29,9 @@
         <th>View</th>
     </tr>
     {% for ticket in tickets %}
+{% if ticket.status == 'Archived' %}
+     
+{% else %}
     <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ ticket.name }}</td>
@@ -37,6 +40,7 @@
         <td><a href="{% url 'view_ticket' ticket.id %}" class="btn btn-primary btn-sm">View</a></td>
     </tr>
     {% endfor %}
+{% endif %}
 </table>
 
 {% endblock content %}
